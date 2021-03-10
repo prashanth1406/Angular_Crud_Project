@@ -1,0 +1,79 @@
+<div class="container">
+  <h3 class="text-center">User Details</h3>
+  <form [formGroup]="userForm" autocomplete="off">
+    <div class="form-group row"> <label class="col-sm-3 col-form-label">First Name*</label>
+      <div class="col-sm-6"> <input type="text"  class="form-control" formControlName="firstName"> </div>
+    </div>
+    <div class="form-group row"> <label for="firstName" class="col-sm-3 col-form-label">Last Name*</label>
+      <div class="col-sm-6"> <input type="text"  class="form-control" formControlName="lastName"> </div>
+    </div>
+    <div class="form-group row"> <label class="col-sm-3 col-form-label">Email*</label>
+      <div class="col-sm-6"> <input type="email"  class="form-control" formControlName="email"> </div>
+    </div>
+    <div class="form-group row"> <label class="col-sm-3 col-form-label">Contact Number*</label>
+      <div class="col-sm-6"> <input type="text"  class="form-control" formControlName="contactNumber"> </div>
+    </div>
+    <div class="form-group row"> <label class="col-sm-3 col-form-label">Date of Birth*</label>
+      <div class="col-sm-6"> <input type="date"  class="form-control" formControlName="dob"> </div>
+    </div>
+    <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <button class="btn btn-primary" (click)="submitForm()" [disabled]="userForm.invalid">Submit</button> &nbsp;
+      <button class="btn btn-danger" (click)="resetForm()">Reset</button>
+    </div>
+    </div>
+  </form>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Contact Number</th>
+        <th>Date of Birth</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="users.length == 0">
+        <td colspan="7" class="text-center"> No Data Avialable</td>
+      </tr>
+      <ng-container *ngIf="users.length>0">
+      <tr *ngFor="let user of users">
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.contactNumber}}</td>
+        <td>{{user.dob |date:'dd MMM yyyy'}}</td>
+        <td>
+          <a class="cp" (click)="updateUser(user)">Edit</a>&nbsp;
+          <a class="text-danger cp" data-toggle="modal" data-target="#deleteModal" (click)="selectedUser=user" >Delete</a>
+        </td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+
+</div>
+
+<div id="deleteModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Confirm</h4>
+      </div>
+      <div class="modal-body">
+        <p>Do you want to delete?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteUser(selectedUser)">Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+      </div>
+    </div>
+
+  </div>
+</div>

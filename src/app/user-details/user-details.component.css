@@ -1,0 +1,15 @@
+.container{
+  margin-top: 50px;
+}
+form{
+  width: 50%;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.col-form-label{
+  padding-top: 7px;
+}
+.cp{
+  cursor: pointer;
+}
